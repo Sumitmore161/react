@@ -11,13 +11,17 @@ function App() {
   const passwordRef = useRef(null);
   const copyMeButtonRef = useRef(null);
   const copyPasswordToClipboard = useCallback(() => {
+    console.log("hello copyPasswordToClipboard function rendered! ")
     window.navigator.clipboard.writeText(password)
+    console.log("Password copied to clipboard: ", password);
     passwordRef.current?.select();
     copyMeButtonRef.current.className = copyMeButtonStyle;
   },[password])
 
+    
   const passwordGenerator = useCallback(() =>
   {
+    console.log("hello passwordGenerator function rendered! ");
     copyMeButtonRef.current.className = copyMeButtonStyle2;
     copyMeButtonStyle = "outline-none  bg-blue-700 text-white px-3 py-0.5 shrink-0";
 
@@ -37,10 +41,12 @@ function App() {
           pass += str[i]; // Fallback to first character if index is out of bounds
     } 
     setPassword(pass);
+    console.log("Generated password: ", pass);
   }, [length , number , charAllowed , setPassword])
   
   useEffect(() => {
     passwordGenerator();
+
   },[length, number, charAllowed, passwordGenerator])
   
   return (
